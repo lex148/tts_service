@@ -39,6 +39,7 @@ app.post('/read', function(request, response){
 app.get('/media/*', function(req, res){
   console.log(req);
   res.writeHead(200, {'Content-Type': 'text/html'});
+  console.log(req.url);
   //res.write(fs.readFileSync('index.html'));
   res.write('test');
   res.end();
