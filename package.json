@@ -1,0 +1,27 @@
+{
+  "name":         "tts_service",
+  "version":      "0.0.0",
+  "description":  "",
+  "keywords":     [ "inventory", "it" ],
+  "maintainers":  [ {
+    "name":   "Lex Childs",
+    "email":  "lex@childs.me"
+  }],
+  "bugs": {
+    "mail": "lex@childs.me"
+  },
+  "repositories": [ {
+      "type":  "git",
+      "url":   ""
+  } ],
+  "engine": "node >= 0.5",
+  "dependencies": {
+    "express":         "2.4.0"
+  },
+  "devDependencies": {
+    "express":         "2.4.0"
+  },
+  "os":       ["linux", "macos"],
+  "cpu":      ["x86", "x86_64"],
+  "engines":  ["v8", "ejs", "node", "rhino"]
+}
