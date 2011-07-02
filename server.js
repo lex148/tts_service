@@ -30,6 +30,7 @@ app.post('/read', function(request, response){
     var callback = function(err,stdout, stderr) {
       response.write("/audio/" + file);
       response.end();
+      exec("rm audio/" + file, function(){});
     };
     exec("echo 'this is a test' | text2wave | lame -V 1 - audio/" + file, callback);
   });
@@ -37,11 +38,14 @@ app.post('/read', function(request, response){
 
 
 app.get('/media/*', function(req, res){
-  console.log(req);
-  res.writeHead(200, {'Content-Type': 'text/html'});
-  console.log(req.url);
-  //res.write(fs.readFileSync('index.html'));
-  res.write('test');
+  if( req.url.match(/media\/(\w+\.\w+)/) ) {
+    var file = req.url.match(/media\/(\w+\.\w+)/)[1];
+    try{
+      res.writeHead(200, {'Content-Type': 'audio/mpeg'});
+      res.write(fs.readFileSync('media/' +  file));
+    }
+    catch(err) {console.log(err); }
+  }
   res.end();
 });
 
