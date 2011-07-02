@@ -1,0 +1,36 @@
+
+<html>
+  <head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
+  </head>
+
+  <body>
+    <form action="./out.mp3" method="post">
+      <input type="text" />
+      <input type="button" id="read" value="Read" />
+    </form>
+
+    <audio controls="controls">
+      <source type="audio/mp3" />
+      Your browser does not support the audio element.
+    </audio>
+
+    <script type="text/javascript">
+
+      $(function(){
+          $('#read').click(function(){
+            $.ajax({
+                url: 'text.mp3',
+                type: 'POST',
+                success: function(data){
+                  alert('success');
+                }
+              });
+            });
+          });
+    
+    </script>
+
+  </body>
+</html>
+
