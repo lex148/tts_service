@@ -9,6 +9,12 @@ function filename(){
   return "" + Math.floor(Math.random()*9999999) + ".mp3";
 }
 
+function clean(str) {
+  try{
+  return str.replace(/['"]/g,"");}
+  catch(err) {console.log(err); return "";}
+}
+
 
 var app = require('express').createServer();
 
@@ -31,7 +37,7 @@ app.post('/read', function(request, response){
       response.write("/audio/" + file);
       response.end();
     };
-    exec("echo 'this is a test' | text2wave | lame -V 1 - audio/" + file, callback);
+    exec("echo '" + clean(POST.text) + "' | text2wave | lame -V 1 - audio/" + file, callback);
   });
 });
 
@@ -50,37 +56,6 @@ app.get('/audio/*', function(req, res){
 });
 
 app.listen(1337);
-
-//var server = http.createServer(
-//  function (request, response) {
-//  if (request.method == 'POST') {
-//    var body = '';
-//    var file = filename();
-//    request.on('data', function (data) {
-//      body += data;
-//    });
-//    request.on('end', function () {
-//      var POST = qs.parse(body);
-//      var callback = function(err,stdout, stderr)
-//      {
-//        sys.puts(stdout); 
-//        response.writeHead(200, {'Content-Type': 'audio/mpeg'});
-//        response.write(fs.readFileSync(file));
-//        response.end();
-//        exec("rm " + file, function(){});
-//      };
-//      exec("echo 'this is a test' | text2wave | lame -V 1 - " + file, callback);
-//    });
-//  }
-//  else {
-//    request.on('end', function () {
-//      response.writeHead(200, {'Content-Type': 'text/html'});
-//      response.write(fs.readFileSync('index.html'));
-//      response.end();
-//    });
-//  }
-//}
-//).listen(1337);
 
 
 

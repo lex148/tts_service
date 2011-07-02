@@ -6,7 +6,7 @@
 
   <body>
     <form action="./out.mp3" method="post">
-      <input type="text" />
+      <input type="text" id='text_to_read' />
       <input type="button" id="read" value="Read" />
     </form>
 
@@ -21,8 +21,10 @@
             $.ajax({
                 url: 'read',
                 type: 'POST',
+                data: {"text": $('#text_to_read').val() } ,
                 success: function(data){
                 $('#playback').html('<audio controls="controls" ><source type="audio/mp3" src="' + data +'" ></audio>');
+                $('#playback audio')[0].play();
                 }
               });
             });
