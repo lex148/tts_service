@@ -20,10 +20,10 @@
       $(function(){
           $('#read').click(function(){
             $.ajax({
-                url: 'text.mp3',
+                url: 'read',
                 type: 'POST',
                 success: function(data){
-                  alert('success');
+                  alert(data);
                 }
               });
             });
