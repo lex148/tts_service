@@ -2,7 +2,7 @@
   "name":         "tts_service",
   "version":      "0.0.0",
   "description":  "",
-  "keywords":     [ "inventory", "it" ],
+  "keywords":     [ "text to speech", "tts" ],
   "maintainers":  [ {
     "name":   "Lex Childs",
     "email":  "lex@childs.me"
