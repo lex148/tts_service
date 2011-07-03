@@ -2,6 +2,51 @@
 <html>
   <head>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js" type="text/javascript"></script>
+
+    <style>
+
+      .tts-reader{
+        background: #9dd53a; /* Old browsers */
+        background: -moz-linear-gradient(top, #9dd53a 0%, #a1d54f 50%, #80c217 51%, #7cbc0a 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#9dd53a), color-stop(50%,#a1d54f), color-stop(51%,#80c217), color-stop(100%,#7cbc0a)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top, #9dd53a 0%,#a1d54f 50%,#80c217 51%,#7cbc0a 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top, #9dd53a 0%,#a1d54f 50%,#80c217 51%,#7cbc0a 100%); /* Opera11.10+ */
+        background: -ms-linear-gradient(top, #9dd53a 0%,#a1d54f 50%,#80c217 51%,#7cbc0a 100%); /* IE10+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9dd53a', endColorstr='#7cbc0a',GradientType=0 ); /* IE6-9 */
+        background: linear-gradient(top, #9dd53a 0%,#a1d54f 50%,#80c217 51%,#7cbc0a 100%); /* W3C */
+      }
+
+      .tts-reader, .url-bar{ min-height:32px; }
+
+      #playback, audio, form { display: inline-block;}
+
+      .tts-reader form, .tts-reader audio {margin:0;}
+      .tts-reader form, .url-bar input
+      {margin-left:10px;}
+      .tts-reader form, .url-bar input
+      {margin-top:3px;}
+
+      #playback {float:right;}
+
+      .tts-reader input[type='text']
+      , .tts-reader form
+      , .url-bar input[type='text']
+      { width:90% }
+
+      .tts-reader form { width:70% }
+
+      .url-bar {background-color: red;}
+      .url-bar { width :600px;}
+      .url-bar { position :absolute;}
+      .tts-reader { position :relative;}
+
+      .url-bar { right:310px; }
+      .url-bar { top:33px; }
+
+
+
+    </style>
+
   </head>
 
   <body>
@@ -11,7 +56,18 @@
       $(function(){
         $('#read').click(function(){
           read_tts();
-        });
+          });
+        $('.url-bar').hide();
+        $('#url-button').click(function(){
+            $('.url-bar').show();
+            });
+        $('.url-bar').mouseleave(function(){
+            $('.url-bar').hide();
+            });
+        $('#change-url').click(function(){
+          $('#winder').attr('src', $('#url-text').val() );
+          });
+
       });
 
       function read_tts(){
@@ -24,7 +80,7 @@
               $('#playback audio')[0].play();
               cleanup_tts(data);
               }
-          });
+        });
       }
 
       function cleanup_tts(data){
@@ -36,17 +92,23 @@
     
     </script>
 
-    <div> 
+    <div class='tts-reader' > 
       <form action="./out.mp3" method="post">
         <input type="text" id='text_to_read' />
         <input type="button" id="read" value="Read" />
       </form>
+      <input type="button" id="url-button" value="url" />
       <div id="playback">
         <audio controls="controls"></audio>
       </div>
     </div>
 
-    <iframe src="http://www.google.com" width='100%' height='100%' />
+    <div class='url-bar'>
+      <input type="text" id='url-text' />
+      <input type="button" id="change-url" value="Go" />
+    </div>
+
+    <iframe id='winder' src="http://www.google.com" width='100%' height='100%' frameborder='0' />
 
   </body>
 </html>
